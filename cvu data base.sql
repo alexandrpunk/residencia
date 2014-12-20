@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `markoptic_cvu` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci */;
 USE `markoptic_cvu`;
--- MySQL dump 10.13  Distrib 5.6.19, for linux-glibc2.5 (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.40, for debian-linux-gnu (x86_64)
 --
 -- Host: 127.0.0.1    Database: markoptic_cvu
 -- ------------------------------------------------------
@@ -56,7 +56,7 @@ CREATE TABLE `Cursos` (
   PRIMARY KEY (`id`),
   KEY `cursos_cvu_idx` (`id_cvu`),
   CONSTRAINT `cursos_cvu` FOREIGN KEY (`id_cvu`) REFERENCES `CVU` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,6 +89,7 @@ DROP TABLE IF EXISTS `Domicilios`;
 CREATE TABLE `Domicilios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_cvu` int(11) NOT NULL,
+  `nom_dom` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `domicilio` text COLLATE utf8_spanish_ci,
   `ciudad` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
   `municipio` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -99,7 +100,7 @@ CREATE TABLE `Domicilios` (
   PRIMARY KEY (`id`),
   KEY `domicilio_cvu_idx` (`id_cvu`),
   CONSTRAINT `domicilio_cvu` FOREIGN KEY (`id_cvu`) REFERENCES `CVU` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,13 +115,13 @@ CREATE TABLE `Domidiomas` (
   `id_cvu` int(11) NOT NULL,
   `idioma` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `certificacion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `nivel` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nivel` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `idioma_cvu_idx` (`id_cvu`),
   CONSTRAINT `idioma_cvu` FOREIGN KEY (`id_cvu`) REFERENCES `CVU` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,7 +141,7 @@ CREATE TABLE `Domtec` (
   PRIMARY KEY (`id`),
   KEY `domtec_cvu_idx` (`id_cvu`),
   CONSTRAINT `domtec_cvu` FOREIGN KEY (`id_cvu`) REFERENCES `CVU` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,17 +161,17 @@ CREATE TABLE `Escuelas` (
   PRIMARY KEY (`id`),
   KEY `escuelas_cvu_idx` (`id_cvu`),
   CONSTRAINT `escuelas_cvu` FOREIGN KEY (`id_cvu`) REFERENCES `CVU` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `Especiaidades`
+-- Table structure for table `Especialidades`
 --
 
-DROP TABLE IF EXISTS `Especiaidades`;
+DROP TABLE IF EXISTS `Especialidades`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Especiaidades` (
+CREATE TABLE `Especialidades` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_cvu` int(11) NOT NULL,
   `nom_esp` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -180,7 +181,7 @@ CREATE TABLE `Especiaidades` (
   PRIMARY KEY (`id`),
   KEY `esp:cvu_idx` (`id_cvu`),
   CONSTRAINT `esp:cvu` FOREIGN KEY (`id_cvu`) REFERENCES `CVU` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,7 +201,7 @@ CREATE TABLE `Histproy` (
   PRIMARY KEY (`id`),
   KEY `hproy_cvu_idx` (`id_cvu`),
   CONSTRAINT `hproy_cvu` FOREIGN KEY (`id_cvu`) REFERENCES `CVU` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -217,7 +218,7 @@ CREATE TABLE `Perfiles` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,13 +233,13 @@ CREATE TABLE `Publicaciones` (
   `id_cvu` int(11) NOT NULL,
   `nom_pub` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
   `tipo_pub` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `desc_pub` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `desc_pub` text COLLATE utf8_spanish_ci,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `publicaciones_cvu_idx` (`id_cvu`),
   CONSTRAINT `publicaciones_cvu` FOREIGN KEY (`id_cvu`) REFERENCES `CVU` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -280,7 +281,7 @@ CREATE TABLE `Titulos` (
   PRIMARY KEY (`id`),
   KEY `titulos_cvu_idx` (`id_cvu`),
   CONSTRAINT `titulos_cvu` FOREIGN KEY (`id_cvu`) REFERENCES `CVU` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -303,7 +304,7 @@ CREATE TABLE `Trabajos` (
   PRIMARY KEY (`id`),
   KEY `trabajos_cvu_idx` (`id_cvu`),
   CONSTRAINT `trabajos_cvu` FOREIGN KEY (`id_cvu`) REFERENCES `CVU` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -328,7 +329,7 @@ CREATE TABLE `Usuarios` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `idPerfil_idx` (`id_perfil`),
   CONSTRAINT `Perfiles` FOREIGN KEY (`id_perfil`) REFERENCES `Perfiles` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -340,4 +341,4 @@ CREATE TABLE `Usuarios` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-13 12:09:55
+-- Dump completed on 2014-12-20  7:48:33
